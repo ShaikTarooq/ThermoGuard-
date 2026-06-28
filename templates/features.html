@@ -1,0 +1,72 @@
+{% extends "marketing_base.html" %}
+{% block title %}Features &middot; {{ app_name }}{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+  <span class="eyebrow">Features</span>
+  <h1 class="hero-title">Everything you need to monitor<br>and control thermal risk.</h1>
+  <p class="hero-sub">From live telemetry to exportable audit trails — built as one connected system, not a pile of separate tools.</p>
+</section>
+
+<section class="content-section">
+  <div class="feature-grid">
+
+    <div class="card feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" width="24" height="24"><path d="M12 12c0-3 2-6 4-6s2 3-1 5c3 0 6 1 6 3s-3 2-6 0c0 3-2 6-4 6s-2-3 1-5c-3 0-6-1-6-3s3-2 6 0Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Automatic fan &amp; AC control</h3>
+      <p>Hysteresis-based logic switches cooling on and off at separate thresholds, preventing rapid relay cycling while keeping temperature inside a safe band.</p>
+    </div>
+
+    <div class="card feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" width="24" height="24"><path d="M3 17V9M9 17V3M15 17v-6M3 17h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Live analytics dashboard</h3>
+      <p>Average and peak temperature, humidity trends, and fan/AC duty cycle — broken down across 1-hour to 30-day windows, charted with Chart.js.</p>
+    </div>
+
+    <div class="card feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" width="24" height="24"><path d="M10 5v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <h3>Searchable history</h3>
+      <p>Filter every logged reading by sensor, status level, or date range. Built for the moment someone asks "what happened last Tuesday at 3pm?"</p>
+    </div>
+
+    <div class="card feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" width="24" height="24"><path d="M8 1.5v8M8 9.5 5 6.5M8 9.5l3-3M2.5 11v2.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>One-click CSV export</h3>
+      <p>Export exactly the filtered view you're looking at — for compliance reports, incident reviews, or sharing with a facilities team.</p>
+    </div>
+
+    <div class="card feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" width="24" height="24"><path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="1.6"/><path d="M16.4 12.3c.1-.3.1-.6.1-.9 0-.3 0-.6-.1-.9l1.4-1.1-1.4-2.4-1.6.6c-.5-.4-1-.7-1.6-.9L13 5h-3l-.2 1.7c-.6.2-1.1.5-1.6.9l-1.6-.6-1.4 2.4 1.4 1.1c-.1.3-.1.6-.1.9s0 .6.1.9l-1.4 1.1 1.4 2.4 1.6-.6c.5.4 1 .7 1.6.9L10 15h3l.2-1.7c.6-.2 1.1-.5 1.6-.9l1.6.6 1.4-2.4-1.4-1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Tunable thresholds</h3>
+      <p>Set fan ON/OFF and AC ON/OFF temperatures per deployment, with built-in validation so your thresholds can't be configured into a flapping mess.</p>
+    </div>
+
+    <div class="card feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" width="24" height="24"><rect x="3" y="6" width="18" height="9" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M7 18l1-3M12 18l1-3M17 18l1-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Responsive, anywhere</h3>
+      <p>The full dashboard, analytics, and history views adapt cleanly from a wide ops monitor down to a phone screen during an on-call check.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>See these features live</h2>
+  <p>The dashboard is running a real simulated feed right now.</p>
+  <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Sign in to ThermoGuard</a>
+</section>
+
+{% endblock %}

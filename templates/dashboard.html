@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Dashboard &middot; {{ app_name }}{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dash-grid">
+
+  <!-- Live gauge card: signature element -->
+  <section class="card gauge-card">
+    <div class="card-header">
+      <h2 class="card-title">{{ sensor_name }}</h2>
+      <span class="badge badge-status" id="statusBadge">Normal</span>
+    </div>
+
+    <div class="gauge-wrap">
+      <svg id="thermoSvg" viewBox="0 0 220 260" class="thermo-svg">
+        <!-- Tube outline -->
+        <rect x="95" y="20" width="30" height="170" rx="15" fill="none" stroke="#E1DFDD" stroke-width="2"/>
+        <circle cx="110" cy="210" r="34" fill="none" stroke="#E1DFDD" stroke-width="2"/>
+        <!-- Fill (height/color set by JS) -->
+        <rect id="thermoFill" x="98" y="120" width="24" height="70" rx="12" fill="#0078D4"/>
+        <circle id="thermoBulb" cx="110" cy="210" r="29" fill="#0078D4"/>
+        <!-- Tick marks -->
+        <g stroke="#C8C6C4" stroke-width="1.5">
+          <line x1="125" y1="40" x2="133" y2="40"/>
+          <line x1="125" y1="75" x2="133" y2="75"/>
+          <line x1="125" y1="110" x2="133" y2="110"/>
+          <line x1="125" y1="145" x2="133" y2="145"/>
+        </g>
+        <text x="138" y="44" class="thermo-tick-label">45°</text>
+        <text x="138" y="79" class="thermo-tick-label">35°</text>
+        <text x="138" y="114" class="thermo-tick-label">25°</text>
+        <text x="138" y="149" class="thermo-tick-label">15°</text>
+      </svg>
+      <div class="gauge-readout">
+        <span class="gauge-temp" id="liveTemp">--.-</span>
+        <span class="gauge-unit">°C</span>
+        <span class="gauge-updated" id="lastUpdated">Connecting…</span>
+      </div>
+    </div>
+
+    <div class="gauge-secondary">
+      <div class="metric-pill">
+        <svg viewBox="0 0 20 20" fill="none" class="metric-icon"><path d="M10 2c2 3.5 5 6.4 5 9.8A5 5 0 0 1 5 11.8C5 8.4 8 5.5 10 2Z" stroke="currentColor" stroke-width="1.4"/></svg>
+        <span id="liveHumidity">--%</span> humidity
+      </div>
+    </div>
+  </section>
+
+  <!-- Fan / AC control cards -->
+  <section class="card control-card">
+    <div class="card-header">
+      <h2 class="card-title">Climate Control</h2>
+    </div>
+    <div class="control-row">
+      <div class="control-item" id="fanControlItem">
+        <div class="control-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" class="control-icon" id="fanIcon">
+            <path d="M12 12c0-3 2-6 4-6s2 3-1 5c3 0 6 1 6 3s-3 2-6 0c0 3-2 6-4 6s-2-3 1-5c-3 0-6-1-6-3s3-2 6 0Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="control-meta">
+          <span class="control-name">Cooling Fan</span>
+          <span class="control-state" id="fanState">OFF</span>
+        </div>
+      </div>
+      <div class="control-item" id="acControlItem">
+        <div class="control-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" class="control-icon" id="acIcon">
+            <rect x="3" y="6" width="18" height="9" rx="2" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M7 18l1-3M12 18l1-3M17 18l1-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="control-meta">
+          <span class="control-name">Air Conditioner</span>
+          <span class="control-state" id="acState">OFF</span>
+        </div>
+      </div>
+    </div>
+    <p class="control-footnote">Automatic control uses hysteresis thresholds set in <a href="{{ url_for('settings_page') }}">Settings</a> — fan engages at {{ thresholds.fan_on }}°C, AC at {{ thresholds.ac_on }}°C.</p>
+  </section>
+
+  <!-- Mini live trend chart -->
+  <section class="card trend-card">
+    <div class="card-header">
+      <h2 class="card-title">Live Trend</h2>
+      <span class="card-subtitle">Last 15 minutes</span>
+    </div>
+    <div class="chart-container chart-container-sm">
+      <canvas id="liveTrendChart"></canvas>
+    </div>
+  </section>
+
+  <!-- Recent events -->
+  <section class="card events-card">
+    <div class="card-header">
+      <h2 class="card-title">Recent Events</h2>
+      <a href="{{ url_for('history_page') }}" class="card-link">View history →</a>
+    </div>
+    <ul class="event-list" id="eventList">
+      {% if recent_events %}
+        {% for e in recent_events %}
+        <li class="event-item event-{{ e.event_type|lower }}">
+          <span class="event-dot"></span>
+          <span class="event-text">{{ e.message }}</span>
+          <span class="event-time">{{ e.timestamp }}</span>
+        </li>
+        {% endfor %}
+      {% else %}
+        <li class="event-item-empty">No events yet — the system just started warming up.</li>
+      {% endif %}
+    </ul>
+  </section>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

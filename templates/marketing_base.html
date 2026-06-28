@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{{ app_name }}{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="marketing-body">
+
+<header class="marketing-nav">
+  <a href="{{ url_for('about') }}" class="marketing-brand">
+    <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+      <rect width="28" height="28" rx="6" fill="#0078D4"/>
+      <path d="M14 6v10.5a3.5 3.5 0 1 1-2 0V6a1 1 0 0 1 2 0Z" fill="#fff"/>
+      <circle cx="13" cy="20" r="1.5" fill="#0078D4"/>
+    </svg>
+    ThermoGuard
+  </a>
+  <nav class="marketing-links">
+    <a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}active{% endif %}">About</a>
+    <a href="{{ url_for('features') }}" class="{% if request.endpoint == 'features' %}active{% endif %}">Features</a>
+    <a href="{{ url_for('applications') }}" class="{% if request.endpoint == 'applications' %}active{% endif %}">Applications</a>
+  </nav>
+  <a href="{{ url_for('login') }}" class="btn btn-primary btn-sm">Sign in</a>
+</header>
+
+<main class="marketing-main">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="marketing-footer">
+  <span>{{ app_name }} v{{ app_version }} &middot; Founded by {{ founder_name }} &middot; &copy; {{ current_year }}</span>
+</footer>
+
+</body>
+</html>

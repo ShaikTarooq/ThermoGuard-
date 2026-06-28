@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Settings &middot; {{ app_name }}{% endblock %}
+{% block page_title %}Settings{% endblock %}
+
+{% block content %}
+
+<form method="POST" action="{{ url_for('settings_page') }}" class="settings-form">
+
+  <div class="card settings-card">
+    <div class="card-header">
+      <h2 class="card-title">Sensor Identity</h2>
+    </div>
+    <div class="settings-field-row">
+      <div class="settings-field">
+        <label class="field-label" for="sensor_name">Sensor name</label>
+        <input class="field-input" type="text" id="sensor_name" name="sensor_name" value="{{ settings.sensor_name }}" required>
+      </div>
+      <div class="settings-field">
+        <label class="field-label" for="temp_unit">Display unit</label>
+        <select class="field-input" id="temp_unit" name="temp_unit">
+          <option value="C" {% if settings.temp_unit == 'C' %}selected{% endif %}>Celsius (°C)</option>
+          <option value="F" {% if settings.temp_unit == 'F' %}selected{% endif %}>Fahrenheit (°F)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card settings-card">
+    <div class="card-header">
+      <h2 class="card-title">Automatic Control</h2>
+      <label class="toggle">
+        <input type="checkbox" name="auto_control_enabled" {% if settings.auto_control_enabled %}checked{% endif %}>
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      </label>
+    </div>
+    <p class="settings-help">When enabled, the fan and AC switch automatically based on the thresholds below. Disable to take manual control during maintenance.</p>
+
+    <div class="settings-field-row">
+      <div class="settings-field">
+        <label class="field-label" for="fan_on_temp">Fan ON threshold (°C)</label>
+        <input class="field-input" type="number" step="0.1" id="fan_on_temp" name="fan_on_temp" value="{{ settings.fan_on_temp }}" required>
+      </div>
+      <div class="settings-field">
+        <label class="field-label" for="fan_off_temp">Fan OFF threshold (°C)</label>
+        <input class="field-input" type="number" step="0.1" id="fan_off_temp" name="fan_off_temp" value="{{ settings.fan_off_temp }}" required>
+      </div>
+    </div>
+
+    <div class="settings-field-row">
+      <div class="settings-field">
+        <label class="field-label" for="ac_on_temp">AC ON threshold (°C)</label>
+        <input class="field-input" type="number" step="0.1" id="ac_on_temp" name="ac_on_temp" value="{{ settings.ac_on_temp }}" required>
+      </div>
+      <div class="settings-field">
+        <label class="field-label" for="ac_off_temp">AC OFF threshold (°C)</label>
+        <input class="field-input" type="number" step="0.1" id="ac_off_temp" name="ac_off_temp" value="{{ settings.ac_off_temp }}" required>
+      </div>
+    </div>
+
+    <div class="settings-field-row">
+      <div class="settings-field">
+        <label class="field-label" for="critical_temp">Critical alert threshold (°C)</label>
+        <input class="field-input" type="number" step="0.1" id="critical_temp" name="critical_temp" value="{{ settings.critical_temp }}" required>
+      </div>
+    </div>
+
+    <p class="settings-help settings-help-muted">Tip: keep a gap of at least 1.5–2°C between the ON and OFF thresholds for each device. This is hysteresis — it stops the relay from rapidly cycling when the temperature sits right at the boundary.</p>
+  </div>
+
+  <div class="settings-actions">
+    <button type="submit" class="btn btn-primary">Save settings</button>
+  </div>
+</form>
+
+{% endblock %}

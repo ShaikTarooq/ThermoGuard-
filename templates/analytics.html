@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Analytics &middot; {{ app_name }}{% endblock %}
+{% block page_title %}Analytics{% endblock %}
+
+{% block content %}
+
+<div class="period-bar">
+  <span class="period-label">Time range</span>
+  <div class="period-pills" id="periodPills">
+    <button class="period-pill" data-period="1h">1H</button>
+    <button class="period-pill" data-period="6h">6H</button>
+    <button class="period-pill active" data-period="24h">24H</button>
+    <button class="period-pill" data-period="7d">7D</button>
+    <button class="period-pill" data-period="30d">30D</button>
+  </div>
+</div>
+
+<div class="stat-grid">
+  <div class="card stat-card">
+    <span class="stat-label">Average Temperature</span>
+    <span class="stat-value" id="statAvgTemp">--°C</span>
+  </div>
+  <div class="card stat-card">
+    <span class="stat-label">Min / Max</span>
+    <span class="stat-value" id="statMinMax">-- / --</span>
+  </div>
+  <div class="card stat-card">
+    <span class="stat-label">Average Humidity</span>
+    <span class="stat-value" id="statAvgHumidity">--%</span>
+  </div>
+  <div class="card stat-card">
+    <span class="stat-label">Fan Active</span>
+    <span class="stat-value" id="statFanPct">--%</span>
+  </div>
+  <div class="card stat-card">
+    <span class="stat-label">AC Active</span>
+    <span class="stat-value" id="statAcPct">--%</span>
+  </div>
+  <div class="card stat-card stat-card-alert">
+    <span class="stat-label">Critical Events</span>
+    <span class="stat-value" id="statCritical">--</span>
+  </div>
+</div>
+
+<div class="card chart-card">
+  <div class="card-header">
+    <h2 class="card-title">Temperature Over Time</h2>
+    <span class="card-subtitle">With fan/AC threshold markers</span>
+  </div>
+  <div class="chart-container">
+    <canvas id="tempHistoryChart"></canvas>
+  </div>
+</div>
+
+<div class="dash-grid dash-grid-2col">
+  <div class="card chart-card">
+    <div class="card-header">
+      <h2 class="card-title">Humidity Over Time</h2>
+    </div>
+    <div class="chart-container">
+      <canvas id="humidityChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card chart-card">
+    <div class="card-header">
+      <h2 class="card-title">System Status Breakdown</h2>
+    </div>
+    <div class="chart-container">
+      <canvas id="statusDoughnut"></canvas>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+{% endblock %}

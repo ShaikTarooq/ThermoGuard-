@@ -1,0 +1,53 @@
+{% extends "marketing_base.html" %}
+{% block title %}About &middot; {{ app_name }}{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+  <span class="eyebrow">About ThermoGuard</span>
+  <h1 class="hero-title">Built to keep critical spaces<br>at a safe temperature, automatically.</h1>
+  <p class="hero-sub">ThermoGuard started as a simple question: why do server rooms, labs, and storage facilities still rely on someone noticing it's gotten too hot? We built the system that notices first.</p>
+</section>
+
+<section class="content-section content-section-split">
+  <div>
+    <h2 class="section-title">Our mission</h2>
+    <p class="section-copy">Heat-related downtime is preventable. ThermoGuard exists to give facilities — from a single server closet to a multi-zone industrial site — a always-on layer of thermal awareness that reacts in seconds, not after someone walks past with a thermometer.</p>
+    <p class="section-copy">Every reading is logged, every fan and AC action is recorded, and every threshold is yours to tune. We built the audit trail first, because trust in an automated system starts with being able to check its work.</p>
+  </div>
+  <div class="founder-card card">
+    <div class="founder-avatar">MT</div>
+    <h3 class="founder-name">{{ founder_name }}</h3>
+    <p class="founder-role">Founder, ThermoGuard</p>
+    <p class="founder-quote">"Temperature problems are rarely sudden — they're noticed too late. ThermoGuard exists to close that gap between when heat starts building and when someone finally checks."</p>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2 class="section-title">How we think about reliability</h2>
+  <div class="value-grid">
+    <div class="value-item">
+      <span class="value-num">01</span>
+      <h3>Hysteresis by default</h3>
+      <p>Our control logic never flips a relay twice for the same temperature swing. ON and OFF thresholds are deliberately separated to protect hardware longevity.</p>
+    </div>
+    <div class="value-item">
+      <span class="value-num">02</span>
+      <h3>Everything is logged</h3>
+      <p>Every reading, every fan/AC transition, every critical event — stored, searchable, and exportable. Nothing about the system's behavior is a black box.</p>
+    </div>
+    <div class="value-item">
+      <span class="value-num">03</span>
+      <h3>Configurable, not fixed</h3>
+      <p>Thresholds live in Settings, not in code. Different rooms run hotter or colder than spec sheets assume — your system should adapt to that.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to see it running?</h2>
+  <p>Sign in to the live dashboard and watch the simulation respond in real time.</p>
+  <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Sign in to ThermoGuard</a>
+</section>
+
+{% endblock %}

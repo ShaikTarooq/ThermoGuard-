@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in &middot; {{ app_name }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-body">
+
+<div class="auth-wrap">
+  <div class="auth-panel-left">
+    <div class="auth-brand">
+      <svg width="36" height="36" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="6" fill="#ffffff" fill-opacity="0.15"/>
+        <path d="M14 6v10.5a3.5 3.5 0 1 1-2 0V6a1 1 0 0 1 2 0Z" fill="#fff"/>
+        <circle cx="13" cy="20" r="1.5" fill="#fff"/>
+      </svg>
+      <span>ThermoGuard</span>
+    </div>
+    <h2 class="auth-headline">Enterprise climate intelligence,<br>watching every degree.</h2>
+    <p class="auth-subcopy">Live sensor telemetry, automatic fan and AC control, and audit-ready history — built for facilities that can't afford to overheat.</p>
+    <ul class="auth-points">
+      <li>Real-time temperature &amp; humidity streaming</li>
+      <li>Automatic hysteresis-based fan/AC control</li>
+      <li>Searchable history with CSV export</li>
+    </ul>
+    <div class="auth-version">Enterprise v{{ app_version }} &middot; Founded by {{ founder_name }}</div>
+  </div>
+
+  <div class="auth-panel-right">
+    <div class="auth-card">
+      <h1 class="auth-title">Sign in</h1>
+      <p class="auth-desc">Use your ThermoGuard operator account to continue.</p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-stack">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('login') }}" class="auth-form" autocomplete="off">
+        <label class="field-label" for="username">Username</label>
+        <input class="field-input" type="text" id="username" name="username" placeholder="admin" required autofocus>
+
+        <label class="field-label" for="password">Password</label>
+        <input class="field-input" type="password" id="password" name="password" placeholder="••••••••" required>
+
+        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+      </form>
+
+      <div class="auth-hint">
+        Demo credentials: <code>admin</code> / <code>admin123</code>
+      </div>
+
+      <div class="auth-footer-links">
+        <a href="{{ url_for('about') }}">About</a>
+        <span>&middot;</span>
+        <a href="{{ url_for('features') }}">Features</a>
+        <span>&middot;</span>
+        <a href="{{ url_for('applications') }}">Applications</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

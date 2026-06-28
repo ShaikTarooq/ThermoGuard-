@@ -1,0 +1,64 @@
+{% extends "marketing_base.html" %}
+{% block title %}Applications &middot; {{ app_name }}{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+  <span class="eyebrow">Applications</span>
+  <h1 class="hero-title">Wherever heat is a risk,<br>ThermoGuard fits.</h1>
+  <p class="hero-sub">The same monitoring and control core adapts to very different environments.</p>
+</section>
+
+<section class="content-section">
+  <div class="app-list">
+
+    <div class="card app-row">
+      <div class="app-row-icon">🖥️</div>
+      <div class="app-row-body">
+        <h3>Server rooms &amp; data closets</h3>
+        <p>Keep rack temperatures inside vendor-recommended ranges and get an immediate, logged response when cooling fails — long before hardware throttles or fails.</p>
+      </div>
+    </div>
+
+    <div class="card app-row">
+      <div class="app-row-icon">🧪</div>
+      <div class="app-row-body">
+        <h3>Laboratories &amp; cleanrooms</h3>
+        <p>Sensitive reagents and equipment often need tighter thermal bands than general HVAC provides. ThermoGuard adds a dedicated, auditable layer on top.</p>
+      </div>
+    </div>
+
+    <div class="card app-row">
+      <div class="app-row-icon">📦</div>
+      <div class="app-row-body">
+        <h3>Warehouses &amp; cold-chain storage</h3>
+        <p>Track temperature across storage zones and prove compliance with exportable history — useful for anything from electronics to perishable goods.</p>
+      </div>
+    </div>
+
+    <div class="card app-row">
+      <div class="app-row-icon">🏭</div>
+      <div class="app-row-body">
+        <h3>Industrial control panels</h3>
+        <p>Electrical cabinets and control panels generate their own heat. Automatic fan/AC response reduces nuisance trips caused by thermal stress.</p>
+      </div>
+    </div>
+
+    <div class="card app-row">
+      <div class="app-row-icon">🏠</div>
+      <div class="app-row-body">
+        <h3>Smart building &amp; facilities ops</h3>
+        <p>Plug into a broader facilities dashboard as the temperature-and-airflow layer, with analytics that feed straight into monthly ops reviews.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Bring ThermoGuard to your space</h2>
+  <p>Sign in to explore the dashboard, analytics, and history with live simulated data.</p>
+  <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Sign in to ThermoGuard</a>
+</section>
+
+{% endblock %}
